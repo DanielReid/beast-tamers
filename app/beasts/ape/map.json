@@ -1,0 +1,135 @@
+[{
+  "cubeCoords": {
+    "x": -3,
+    "y": 2,
+    "z": 1
+  },
+  "label": -2
+}, {
+  "cubeCoords": {
+    "x": -3,
+    "y": 1,
+    "z": 2
+  },
+  "label": -1
+}, {
+  "cubeCoords": {
+    "x": -2,
+    "y": 0,
+    "z": 2
+  },
+  "label": 0
+}, {
+  "cubeCoords": {
+    "x": -2,
+    "y": 1,
+    "z": 1
+  },
+  "label": 1
+}, {
+  "cubeCoords": {
+    "x": -2,
+    "y": 2,
+    "z": 0
+  },
+  "label": 2
+}, {
+  "cubeCoords": {
+    "x": -1,
+    "y": 0,
+    "z": 1
+  },
+  "label": 4
+}, {
+  "cubeCoords": {
+    "x": -1,
+    "y": 1,
+    "z": 0
+  },
+  "label": 5
+}, {
+  "cubeCoords": {
+    "x": -1,
+    "y": 2,
+    "z": -1
+  },
+  "label": 6,
+  "hasPlayer": true
+}, {
+  "cubeCoords": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "label": 9
+}, {
+  "cubeCoords": {
+    "x": 0,
+    "y": 1,
+    "z": -1
+  },
+  "label": 10
+}, {
+  "cubeCoords": {
+    "x": 0,
+    "y": 2,
+    "z": -2
+  },
+  "label": 11
+}, {
+  "cubeCoords": {
+    "x": 1,
+    "y": -1,
+    "z": 0
+  },
+  "label": 13
+}, {
+  "cubeCoords": {
+    "x": 1,
+    "y": 0,
+    "z": -1
+  },
+  "label": 14
+}, {
+  "cubeCoords": {
+    "x": 1,
+    "y": 1,
+    "z": -2
+  },
+  "label": 15
+}, {
+  "cubeCoords": {
+    "x": 2,
+    "y": -2,
+    "z": 0
+  },
+  "label": 16
+}, {
+  "cubeCoords": {
+    "x": 2,
+    "y": -1,
+    "z": -1
+  },
+  "label": 17
+}, {
+  "cubeCoords": {
+    "x": 2,
+    "y": 0,
+    "z": -2
+  },
+  "label": 18
+}, {
+  "cubeCoords": {
+    "x": 3,
+    "y": -2,
+    "z": -1
+  },
+  "label": 19
+},{
+  "cubeCoords": {
+    "x": 3,
+    "y": -1,
+    "z": -2
+  },
+  "label": 20
+}]
