@@ -35,6 +35,9 @@
     "falcor-express": "^0.1.2",
     "falcor-http-datasource": "^0.1.2",
     "falcor-router": "^0.2.12",
+    "flux": "^2.1.1",
+    "keymirror": "^0.1.1",
+    "object-assign": "^4.0.1",
     "react": "~0.14",
     "react-art": "~0.14",
     "react-dom": "~0.14"

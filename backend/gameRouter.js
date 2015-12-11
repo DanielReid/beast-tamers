@@ -8,13 +8,15 @@ var $atom = falcor.Model.atom;
 var $ref = falcor.Model.ref;
 
 var data = {
-  classes: [{
+  playerClasses: [{
+    id: 0,
     name: 'Shieldbot',
     maxHealth: 2,
     move: 3,
     range: 2,
     tranq: 1
   }, {
+    id: 1,
     name: 'Sniper',
     maxHealth: 2,
     move: 2,
@@ -22,16 +24,20 @@ var data = {
     tranq: 3
   }],
   players: [{
+    id: 0,
     name: 'Player 1',
-    class: $ref('classes[0]'),
+    playerClass: $ref('playerClasses[0]'),
+    colour: 'red',
     position: $atom({
       x: 2,
       y: 0,
       z: -2
     })
   }, {
+    id: 1,
     name: 'Player 2',
-    class: $ref('classes[1]'),
+    playerClass: $ref('playerClasses[1]'),
+    colour: 'yellow',
     position: $atom({
       x: -2,
       y: 0,
@@ -39,6 +45,7 @@ var data = {
     })
   }],
   beasts: [{
+    id: 0,
     name: 'ape',
     map: $atom(apeMap)
   }]
@@ -48,6 +55,7 @@ function extractProperties(pathSet, root, data) {
   var results = [];
   pathSet.indices.forEach((index) => {
     pathSet[2].map((fieldName) => { // pathSet[2] holds which fieldNames asked
+      console.log('   ~~~ retrieving ' + fieldName);
       if (data.length > index) {
         results.push({
           path: [root, index, fieldName],
@@ -76,10 +84,16 @@ Router.createClass([{
     return extractProperties(pathSet, 'beasts', data.beasts);
   }
 }, {
-  route: 'players[{integers:indices}]["name", "class", "position"]',
+  route: 'players[{integers:indices}]["colour", "name", "position", "playerClass"]',
   get: function(pathSet) {
-    console.log('@@@ getting players')
+    console.log('@@@ getting players;pathSet ' + JSON.stringify(pathSet) )
     return extractProperties(pathSet, 'players', data.players);
+  }
+}, {
+  route: 'playerClasses[{integers:indices}]["name", "maxHealth", "move", "range", "tranq"]',
+  get: function(pathSet) {
+    console.log('@@@ getting players;pathSet ' + JSON.stringify(pathSet) )
+    return extractProperties(pathSet, 'playerClasses', data.playerClasses);
   }
 }]) {
   constructor() {

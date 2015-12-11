@@ -2,6 +2,9 @@ import React from 'react';
 import falcor from 'falcor';
 import FalcorHttpDataSource from 'falcor-http-datasource';
 import Gameboard from './gameboard';
+import PlayerStore from './../stores/playerStore';
+import MonsterStore from './../stores/monsterStore';
+import GameActions from './../actions/gameActions';
 import _ from 'lodash';
 
 export default class extends React.Component {
@@ -15,30 +18,20 @@ export default class extends React.Component {
     };
   }
 
-  componentWillMount() {
-    this.update();
+  componentDidMount() {
+    PlayerStore.addChangeListener(this._onChange.bind(this));
+    MonsterStore.addChangeListener(this._onChange.bind(this));
+    GameActions.loadPlayers();
+    GameActions.loadMonster();
   }
 
-  update() {
-    this.state.model.get('beasts[0]["name", "map"]').then((result) => {
-      this.setState({
-        beast : {
-          name: result.json.beasts[0].name,
-          map: result.json.beasts[0].map
-        }
-      });
-    });
-    this.state.model.get('players[0..1]["name", "position"]').then((result) => {
-      this.setState({
-        players: _.map(result.json.players, (player) => {
-          return {
-            name: player.name,
-            position: player.position
-          };
-        })
-      });
+  _onChange() {
+    this.setState({
+      players: PlayerStore.getPlayers(),
+      beast: MonsterStore.getMonster()
     });
   }
+
 
   render() {
     return (

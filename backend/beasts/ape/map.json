@@ -1,17 +1,38 @@
 [{
   "cubeCoords": {
+    "x": -4,
+    "y": 2,
+    "z": 2
+  },
+  "label": -4
+},{
+  "cubeCoords": {
+    "x": -4,
+    "y": 1,
+    "z": 3
+  },
+  "label": -5
+},{
+  "cubeCoords": {
+    "x": -3,
+    "y": 0,
+    "z": 3
+  },
+  "label": -3
+}, {
+  "cubeCoords": {
     "x": -3,
     "y": 2,
     "z": 1
   },
-  "label": -2
+  "label": -1
 }, {
   "cubeCoords": {
     "x": -3,
     "y": 1,
     "z": 2
   },
-  "label": -1
+  "label": -2
 }, {
   "cubeCoords": {
     "x": -2,
@@ -132,4 +153,25 @@
     "z": -2
   },
   "label": 20
+},{
+  "cubeCoords": {
+    "x": 3,
+    "y": -3,
+    "z": 0
+  },
+  "label": 21
+},{
+  "cubeCoords": {
+    "x": 4,
+    "y": -2,
+    "z": -2
+  },
+  "label": 22
+},{
+  "cubeCoords": {
+    "x": 4,
+    "y": -3,
+    "z": -1
+  },
+  "label": 23
 }]
