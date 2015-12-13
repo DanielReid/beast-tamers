@@ -2,22 +2,40 @@ import {EventEmitter} from 'events';
 import Dispatcher from './../dispatcher/dispatcher';
 import GameConstants from './../constants/gameConstants';
 import assign from 'object-assign';
+import _ from 'lodash';
+import {hexDist} from './../hexUtil';
 
-var _players = [];
+var _players = {};
+var _selectedPlayer = undefined;
 const CHANGE_EVENT = 'change';
 
 function loadPlayers(players) {
   _players = players;
 }
 
-function selectPlayer(player) {
-  _players[player.id].isSelected = true;
+function clickPlayer(clickedPlayer) {
+  _players = _.reduce(_players, (accum, player) => {
+    player.isSelected = (player.id === clickedPlayer.id) ? !player.isSelected : false;
+    accum[player.id] = player;
+    return accum;
+  }, {});
+  _selectedPlayer = clickedPlayer.isSelected ? clickedPlayer : undefined;
 }
 
+function clickCell(cubeCoords) {
+  if(_selectedPlayer &&
+     hexDist(cubeCoords, _selectedPlayer.position) <= _selectedPlayer.playerClass.move) {
+    _selectedPlayer.position = cubeCoords;
+  }
+}
 
 var PlayerStore = assign({}, EventEmitter.prototype, {
   getPlayers() {
     return _players;
+  },
+
+  getSelectedPlayer() {
+    return _selectedPlayer;
   },
 
   emitChange: function() {
@@ -41,8 +59,11 @@ var PlayerStore = assign({}, EventEmitter.prototype, {
 
 PlayerStore.dispatch = Dispatcher.register((action) => {
   switch(action.actionType) {
+    case GameConstants.CLICK_CELL:
+      clickCell(action.cubeCoords);
+      break;
     case GameConstants.CLICK_PLAYER: 
-      selectPlayer(action.player);
+      clickPlayer(action.player);
       break;
     case GameConstants.LOAD_PLAYERS:
       loadPlayers(action.response);

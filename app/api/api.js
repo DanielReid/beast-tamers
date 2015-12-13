@@ -19,18 +19,18 @@ function dispatch(key, response, params) {
 }
 
 function loadPlayers() {
-  var classProps = ['name', 'maxHealth', 'range', 'tranq', 'move'];
-  var playerProps = ['name', 'position', 'colour'];
+  var classProps = ['id', 'name', 'maxHealth', 'range', 'tranq', 'move'];
+  var playerProps = ['id', 'name', 'position', 'colour'];
 
   dispatch(GameConstants.LOAD_PLAYERS);
   _model.get(['players', {
     from: 0,
-    to: 1
+    to: 2
   }, playerProps], ['players', {
     from: 0,
-    to: 1
+    to: 2
   }, 'playerClass', classProps]).then((result) => {
-    dispatch(GameConstants.LOAD_PLAYERS, _.values(result.json.players))
+    dispatch(GameConstants.LOAD_PLAYERS, result.json.players)
   });
 }
 

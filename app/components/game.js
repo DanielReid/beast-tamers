@@ -8,17 +8,7 @@ import GameActions from './../actions/gameActions';
 import _ from 'lodash';
 
 export default class extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      model: new falcor.Model({
-        source: new FalcorHttpDataSource('/model.json')
-      }),
-      beast: {}
-    };
-  }
-
-  componentDidMount() {
+  componentWillMount() {
     PlayerStore.addChangeListener(this._onChange.bind(this));
     MonsterStore.addChangeListener(this._onChange.bind(this));
     GameActions.loadPlayers();
@@ -28,6 +18,7 @@ export default class extends React.Component {
   _onChange() {
     this.setState({
       players: PlayerStore.getPlayers(),
+      selectedPlayer: PlayerStore.getSelectedPlayer(),
       beast: MonsterStore.getMonster()
     });
   }
@@ -35,12 +26,11 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div onClick={(e) => {
-            console.log('click event client x:' + e.clientX + ', y: ' + e.clientY);
-            console.log('click event page x:' + e.pageX + ', y: ' + e.pageY);
-          }}
-      >
-        <Gameboard beast={this.state.beast} players={this.state.players}/>
+      <div>
+        <Gameboard 
+          beast={this.state.beast} 
+          players={this.state.players}
+          selectedPlayer={this.state.selectedPlayer}/>
       </div>
     )
   }

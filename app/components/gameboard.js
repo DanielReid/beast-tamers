@@ -1,16 +1,10 @@
 import React from 'react';
 import {Surface, Pattern, Path, Shape} from 'react-art';
-import Circle from 'react-art/shapes/circle';
 import Grid from './grid';
 import PlayerList from './playerList';
+import PlayerCircle from './playerCircle';
+import MoveHighlights from './moveHighlights';
 import _ from 'lodash';
-import {cubeToPixel} from './../hexUtil';
-
-function createPlayerCircle(centre, player) {
-  var size = 40;
-  var coords = cubeToPixel(size, player.position, centre);
-  return <Circle key={player.name} radius={size / 2} fill={player.colour} stroke="black" x={coords.x} y = {coords.y}> </Circle> 
-}
 
 export default class extends React.Component {
   render() {
@@ -31,9 +25,17 @@ export default class extends React.Component {
       ? <Grid data={this.props.beast.map} centre={centre} /> 
       : undefined;
     var playerCircles = this.props.players
-      ? this.props.players.map(_.partial(createPlayerCircle, centre))
+      ? _.map(this.props.players, (player, index) => {
+        return <PlayerCircle key={index} centre={centre} player={player} />
+      })
       : undefined;
-
+    var moveHighlights = this.props.selectedPlayer && this.props.beast
+      ? <MoveHighlights 
+          map={this.props.beast.map} 
+          player={this.props.selectedPlayer} 
+          centre={centre}
+        />
+      : undefined;
     return (
       <div className="gameBoard">
         <h1>Tame that beast</h1>
@@ -44,6 +46,7 @@ export default class extends React.Component {
             x={225} 
             y={220} 
             fill={new Pattern(beastImg, 200, 132, 0, 0)} />
+          {moveHighlights}
           {playerCircles}
         </Surface>
         <PlayerList players={this.props.players}/>

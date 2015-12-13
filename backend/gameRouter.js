@@ -22,6 +22,13 @@ var data = {
     move: 2,
     range: 3,
     tranq: 3
+  }, {
+    id: 1,
+    name: 'Enchancer',
+    maxHealth: 2,
+    move: 2,
+    range: 2,
+    tranq: 1
   }],
   players: [{
     id: 0,
@@ -42,6 +49,16 @@ var data = {
       x: -2,
       y: 0,
       z: 2
+    })
+  }, {
+    id: 2,
+    name: 'Player 3',
+    playerClass: $ref('playerClasses[2]'),
+    colour: 'blue',
+    position: $atom({
+      x: 3,
+      y: -3,
+      z: 0
     })
   }],
   beasts: [{
@@ -84,13 +101,13 @@ Router.createClass([{
     return extractProperties(pathSet, 'beasts', data.beasts);
   }
 }, {
-  route: 'players[{integers:indices}]["colour", "name", "position", "playerClass"]',
+  route: 'players[{integers:indices}]["id", "colour", "name", "position", "playerClass"]',
   get: function(pathSet) {
     console.log('@@@ getting players;pathSet ' + JSON.stringify(pathSet) )
     return extractProperties(pathSet, 'players', data.players);
   }
 }, {
-  route: 'playerClasses[{integers:indices}]["name", "maxHealth", "move", "range", "tranq"]',
+  route: 'playerClasses[{integers:indices}]["id", "name", "maxHealth", "move", "range", "tranq"]',
   get: function(pathSet) {
     console.log('@@@ getting players;pathSet ' + JSON.stringify(pathSet) )
     return extractProperties(pathSet, 'playerClasses', data.playerClasses);

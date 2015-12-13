@@ -1,9 +1,9 @@
 import React from 'react';
-import {selectPlayer} from '../actions/gameActions';
+import {clickPlayer} from '../actions/gameActions';
 
 export default class extends React.Component {
   _onClick() {
-    selectPlayer(this.props.player);
+    clickPlayer(this.props.player);
   }
 
   render() {
@@ -12,7 +12,7 @@ export default class extends React.Component {
       : {};
     return (
       <div style={selectedStyle} onClick={this._onClick.bind(this)}>
-        <h1>{this.props.player.name}</h1>
+        <h1 style={{color: this.props.player.colour}}>{this.props.player.name}</h1>
         <p>class: {this.props.player.playerClass.name}</p>
       </div>
     );

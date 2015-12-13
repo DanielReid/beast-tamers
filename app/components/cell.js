@@ -1,31 +1,8 @@
 import React from 'react';
-import {Shape, Path, Group, Text} from 'react-art';
+import {Group, Text} from 'react-art';
 import {cubeToPixel} from './../hexUtil';
-
-function makeHexPath(size, coords) {
-  var path = new Path();
-  var point = 0;
-  var angle = null;
-  var x = null;
-  var y = null;
-
-  while (point < 7) {
-    angle = 2 * Math.PI / 6 * (point);
-    x = coords.x + size * Math.cos(angle);
-    y = coords.y + size * Math.sin(angle);
-
-    if (point === 0) {
-      path.moveTo(x, y);
-    }
-    else {
-      path.lineTo(x, y);
-    }
-
-    point = point + 1;
-  }
-
-  return path;
-}
+import Hex from './hex';
+import GameConstants from './../constants/gameConstants';
 
 export default class extends React.Component {
   constructor(props) {
@@ -37,17 +14,17 @@ export default class extends React.Component {
     };
   }
 
-  handleClick() {
-    
+  _onClick() {
+    console.log('cell clicked');
+    clickCell(this.state.cubeCoords);
   }
 
   render() {
-    var size = 40;
     var coords = this.state.coords;
-    var path = makeHexPath(size, coords);
+    var size = GameConstants.HEX_SIZE;
     return (
-      <Group onClick={this.handleClick}>
-        <Shape d={path} fill="white" stroke="black"></Shape>
+      <Group onClick={this._onClick.bind(this)}>
+        <Hex size={size} pixelCoords={coords} colour='white'/>
         <Text x={coords.x + size/2} y={coords.y - 10} fill="orange">
           {this.state.cubeCoords.x.toString()}
         </Text>
