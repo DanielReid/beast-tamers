@@ -16,7 +16,7 @@ export default class MoveHiglights extends React.Component {
               cell.cubeCoords.y === cubeCoord.y &&
               cell.cubeCoords.z === cubeCoord.z;
           });
-        })
+        }, this)
         .map(function(coords, index) {
           var pixelCoords = cubeToPixel(GameConstants.HEX_SIZE, coords, centre);
           return (
@@ -28,7 +28,7 @@ export default class MoveHiglights extends React.Component {
               colour={this.props.player.colour} 
               opacity={0.3} 
             />)
-        });
+        }, this);
       return (
         <Group>
           {cells}

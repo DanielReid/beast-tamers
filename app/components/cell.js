@@ -3,6 +3,7 @@ import {Group, Text} from 'react-art';
 import {cubeToPixel} from './../hexUtil';
 import Hex from './hex';
 import GameConstants from './../constants/gameConstants';
+import {clickCell} from './../actions/gameActions';
 
 export default class extends React.Component {
   constructor(props) {
