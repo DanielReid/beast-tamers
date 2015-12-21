@@ -19,23 +19,23 @@ function dispatch(key, response, params) {
 }
 
 function loadPlayers() {
-  var classProps = ['id', 'name', 'maxHealth', 'range', 'tranq', 'move'];
-  var playerProps = ['id', 'name', 'position', 'colour'];
+  var CLASS_PROPS = ['id', 'name', 'maxHealth', 'range', 'tranq', 'move', 'actionsPerTurn'];
+  var PLAYER_PROPS = ['id', 'name', 'position', 'colour'];
 
   dispatch(GameConstants.LOAD_PLAYERS);
   _model.get(['players', {
     from: 0,
     to: 2
-  }, playerProps], ['players', {
+  }, PLAYER_PROPS], ['players', {
     from: 0,
     to: 2
-  }, 'playerClass', classProps]).then((result) => {
+  }, 'playerClass', CLASS_PROPS]).then((result) => {
     dispatch(GameConstants.LOAD_PLAYERS, result.json.players)
   });
 }
 
 function loadMonster() {
-  _model.get('beasts[0]["name", "map"]').then((result) => {
+  _model.get('beasts[0]["name", "map","dmgRequired","bodyCells"]').then((result) => {
     dispatch(GameConstants.LOAD_MONSTER, result.json.beasts[0]);
   });
 }

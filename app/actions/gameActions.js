@@ -17,12 +17,25 @@ var GameActions = {
     });
   },
 
+  clickBeast(clickingPlayer) {
+    Dispatcher.dispatch({
+      actionType: GameConstants.CLICK_BEAST,
+      clickingPlayer: clickingPlayer
+    });
+  },
+
   loadPlayers() {
     Api.loadPlayers();
   },
   
   loadMonster() {
     Api.loadMonster();
+  },
+
+  initGameState() {
+    Dispatcher.dispatch({
+      actionType: GameConstants.RESET_PLAYER_ACTIONS
+    });
   }
 };
 

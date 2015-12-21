@@ -3,6 +3,7 @@ import {Surface, Pattern, Path, Shape} from 'react-art';
 import Grid from './grid';
 import PlayerList from './playerList';
 import PlayerCircle from './playerCircle';
+import Beast from './beast';
 import MoveHighlights from './moveHighlights';
 import _ from 'lodash';
 
@@ -14,15 +15,9 @@ export default class extends React.Component {
       x: width / 2,
       y: height / 2
     };
-    var rectanglePath = new Path();
-    rectanglePath.moveTo(0, 0);
-    rectanglePath.lineTo(200, 0);
-    rectanglePath.lineTo(200, 132);
-    rectanglePath.lineTo(0, 132);
-    rectanglePath.lineTo(0, 0);
-    var beastImg = require('./../../backend/beasts/ape/ape.png');
+
     var grid = this.props.beast 
-      ? <Grid data={this.props.beast.map} centre={centre} /> 
+      ? <Grid data={this.props.beast.map ? this.props.beast.map.concat(this.props.beast.bodyCells) : undefined} centre={centre} /> 
       : undefined;
     var playerCircles = this.props.players
       ? _.map(this.props.players, (player, index) => {
@@ -41,15 +36,13 @@ export default class extends React.Component {
         <h1>Tame that beast</h1>
         <Surface width={width} height={height}>
           {grid}
-          <Shape 
-            d={rectanglePath} 
-            x={225} 
-            y={220} 
-            fill={new Pattern(beastImg, 200, 132, 0, 0)} />
+          <Beast />
           {moveHighlights}
           {playerCircles}
         </Surface>
         <PlayerList players={this.props.players}/>
+        <p>Turn {this.props.turnNumber}</p>
+        <p>Beast HP {this.props.beast.remainingHp}</p>
       </div>
     )
   }

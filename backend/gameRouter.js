@@ -7,6 +7,30 @@ var _ = require('lodash');
 var $atom = falcor.Model.atom;
 var $ref = falcor.Model.ref;
 
+var apeCells = [{
+  cubeCoords: {
+    x:  0,
+    y: -1,
+    z:  1,
+  },
+  label: 'ape1'
+},{
+  cubeCoords: {
+    x: -1,
+    y: -1,
+    z:  2,
+  },
+  label: 'ape2'
+}, {
+  cubeCoords: {
+    x:  1,
+    y: -2,
+    z:  1,
+  },
+  label: 'ape1'
+}
+]
+
 var data = {
   playerClasses: [{
     id: 0,
@@ -14,21 +38,24 @@ var data = {
     maxHealth: 2,
     move: 3,
     range: 2,
-    tranq: 1
+    tranq: 1,
+    actionsPerTurn: 2
   }, {
     id: 1,
     name: 'Sniper',
     maxHealth: 2,
-    move: 2,
+    move: 3,
     range: 3,
-    tranq: 3
+    tranq: 3,
+    actionsPerTurn: 1
   }, {
     id: 1,
     name: 'Enchancer',
     maxHealth: 2,
     move: 2,
     range: 2,
-    tranq: 1
+    tranq: 1,
+    actionsPerTurn: 2
   }],
   players: [{
     id: 0,
@@ -64,7 +91,9 @@ var data = {
   beasts: [{
     id: 0,
     name: 'ape',
-    map: $atom(apeMap)
+    dmgRequired: 20,
+    map: $atom(apeMap),
+    bodyCells: $atom(apeCells)
   }]
 };
 
@@ -95,7 +124,7 @@ Router.createClass([{
     };
   }
 }, {
-  route: 'beasts[{integers:indices}]["name", "map"]',
+  route: 'beasts[{integers:indices}]["name", "dmgRequired", "map", "bodyCells"]',
   get: function(pathSet) {
     console.log('@@@ getting beasts')
     return extractProperties(pathSet, 'beasts', data.beasts);
@@ -107,7 +136,7 @@ Router.createClass([{
     return extractProperties(pathSet, 'players', data.players);
   }
 }, {
-  route: 'playerClasses[{integers:indices}]["id", "name", "maxHealth", "move", "range", "tranq"]',
+  route: 'playerClasses[{integers:indices}]["id", "name", "maxHealth", "move", "range", "tranq", "actionsPerTurn"]',
   get: function(pathSet) {
     console.log('@@@ getting players;pathSet ' + JSON.stringify(pathSet) )
     return extractProperties(pathSet, 'playerClasses', data.playerClasses);
