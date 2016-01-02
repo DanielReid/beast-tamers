@@ -1,15 +1,12 @@
 import React from 'react';
 import Gameboard from './gameboard';
-import PlayerStore from './../stores/playerStore';
-import MonsterStore from './../stores/monsterStore';
 import GameStore from './../stores/gameStore';
 import GameActions from './../actions/gameActions';
 
 export default class extends React.Component {
   componentWillMount() {
     var onChange = this._onChange.bind(this);
-    PlayerStore.addChangeListener(onChange);
-    MonsterStore.addChangeListener(onChange);
+    GameStore.addChangeListener(onChange);
     GameStore.addChangeListener(onChange);
 
     GameActions.loadPlayers();
@@ -19,16 +16,15 @@ export default class extends React.Component {
 
   componentWillUnmount() {
     var onChange = this._onChange.bind(this);
-    PlayerStore.removeChangeListener(onChange);
-    MonsterStore.removeChangeListener(onChange);
+    GameStore.removeChangeListener(onChange);
     GameStore.removeChangeListener(onChange);
   }
 
   _onChange() {
     this.setState({
-      players: PlayerStore.getPlayers(),
-      selectedPlayer: PlayerStore.getSelectedPlayer(),
-      beast: MonsterStore.getMonster(),
+      players: GameStore.getPlayers(),
+      selectedPlayer: GameStore.getSelectedPlayer(),
+      beast: GameStore.getMonster(),
       turnNumber: GameStore.getTurn()
     });
   }

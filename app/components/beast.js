@@ -1,10 +1,10 @@
 import React from 'react';
 import {Shape, Path, Pattern} from 'react-art';
 import {clickBeast} from './../actions/gameActions';
-import PlayerStore from './../stores/playerStore';
+import GameStore from './../stores/gameStore';
 export default class Beast extends React.Component {
   _onClick() {
-    clickBeast(PlayerStore.getSelectedPlayer());
+    clickBeast(GameStore.getSelectedPlayer());
     console.log('click beast');
   }
 

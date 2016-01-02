@@ -17,7 +17,7 @@ export default class extends React.Component {
     };
 
     var grid = this.props.beast 
-      ? <Grid data={this.props.beast.map ? this.props.beast.map.concat(this.props.beast.bodyCells) : undefined} centre={centre} /> 
+      ? <Grid data={this.props.beast.map} centre={centre} /> 
       : undefined;
     var playerCircles = this.props.players
       ? _.map(this.props.players, (player, index) => {

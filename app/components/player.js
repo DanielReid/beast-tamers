@@ -14,6 +14,7 @@ export default class extends React.Component {
       <div style={selectedStyle} onClick={this._onClick.bind(this)}>
         <h1 style={{color: this.props.player.colour}}>{this.props.player.name}</h1>
         <p>class: {this.props.player.playerClass.name}</p>
+        <p>range: {this.props.player.playerClass.range}</p>
         <p>actions per turn: {this.props.player.playerClass.actionsPerTurn}</p>
         <p>remaining actions: {this.props.player.remainingActions}</p>
       </div>

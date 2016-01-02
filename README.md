@@ -6,7 +6,7 @@ Also trying to figure out some javascript stuff like React, Falcor and Flux.
 
 Requirements: 
 
-  - latest version of nodejs
+  - A recent version of nodejs (>= 4.0.0)
   - npm
 
 Running:
